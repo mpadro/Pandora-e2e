@@ -1,9 +1,11 @@
 import { ElementFinder, element, by, browser, protractor, ExpectedConditions } from 'protractor';
 
-class PanelActionsComponent {
+export class PanelActionsComponent {
+
+    constructor(private rootElement: ElementFinder) { }
 
     get root(): ElementFinder {
-        return element(by.tagName('panel-actions'));
+        return this.rootElement;
     }
 
     get userMenuButton(): ElementFinder {
@@ -20,13 +22,14 @@ class PanelActionsComponent {
 
     async getLoggedUser(): Promise<string> {
         await browser.actions().mouseMove(this.root).perform();
-        await browser.wait( async () => await this.loggedUserDiv.getText() !== '')
-        return await this.loggedUserDiv.getText();  
+        await browser.wait(async () => await this.loggedUserDiv.getText() !== '')
+        return await this.loggedUserDiv.getText();
     }
 
     async logout() {
+        await browser.wait(ExpectedConditions.elementToBeClickable(this.userMenuButton),10000 , "User Menu isn't clickable");
         this.userMenuButton.click();
+        await browser.wait(ExpectedConditions.elementToBeClickable(this.logoutButton),10000 , "User Menu isn't clickable");
         this.logoutButton.click();
     }
 }
-export default new PanelActionsComponent();

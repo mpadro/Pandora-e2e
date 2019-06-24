@@ -9,6 +9,7 @@ This is a Protractor demo project to test Pandora App
 Padora-e2e/
 |- node_modules/       // downloaded node modules
 |- src
+  |- components/         // components on the pages
   |- helpers/            // helper functions
   |- pages/              // pages represented with page objects framework
   |- specs/              // it contains all of the test classes
@@ -26,35 +27,6 @@ Install the node_modules with:
 
 ```
 npm install
-```
-
-
-## Protractor typings
-
-To use Protractor types, you'll need to import `protractor`. After this is imported, you should have autocompletion hints when typing.
-
-```
-import {browser, element, by, By, $, $$, ExpectedConditions} from 'protractor';
-```
-
-Although the Protractor configuration file can be written in javascript, creating it in typescript will have some hints. These hints and the reference configuration can be found in `lib/config.ts`. Below we are importing the Config interface and applying that interface to the config variable:
-
-```
-import {Config} from 'protractor';
-
-export let config: Config = {
-  ...
-}
-```
-
-## Ambient typings
-
-Protractor also uses ambient types including jasmine, jasminewd2, and node. These are brought in via the `tsconfig.json` file, which uses npm module resolution to get types from `node_modules/@types`.
-
-If you are using the jasmine framework for your tests, make sure to do:
-
-```
-npm install --save-dev @types/jasmine @types/jasminewd2
 ```
 
 ## Running Protractor

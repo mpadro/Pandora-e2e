@@ -48,9 +48,12 @@ class LoginPage {
         await browser.wait(ExpectedConditions.not(ExpectedConditions.presenceOf(this.proceedButton)), 10000, "Login wasn't processed in the expected time");
     }
 
-    async verifyLoginError() {
-        expect(await this.errorMessage.isDisplayed()).toBe(true);
-        expect(await this.errorMessage.getText()).toBe("The provided username and password combination was incorrect.");
+    async isErrorMessagePresent() {
+        return await this.errorMessage.isDisplayed();
+    }
+
+    async getErrorMessageText() {
+        return await this.errorMessage.getText();
     }
 }
 export default new LoginPage();

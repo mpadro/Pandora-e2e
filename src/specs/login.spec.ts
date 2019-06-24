@@ -1,11 +1,11 @@
-import loginPage from '../components/loginPage.component';
-import dashboardComponent from '../components/dashboard.component';
+import loginPage from '../pages/login.page';
+import dashboardPage from '../pages/dashboard.page';
 import { browser, ExpectedConditions } from 'protractor';
-import panelActionsComponent from '../components/panelActions.component';
+import { UserData } from '../app-config';
 
 describe('Login', () => {
-  const USER ="tester";
-  const PASSWORD = "test_1234";
+  const USER = UserData.USER;
+  const PASSWORD = UserData.PASSWORD;
   const INVALID_PASSWORD = "test_123";
 
   beforeEach(async () => {
@@ -13,21 +13,23 @@ describe('Login', () => {
   });
 
   afterAll(async () => {
-    if(await panelActionsComponent.root.isPresent()){
-      await panelActionsComponent.logout();
+    if(await dashboardPage.panelActions.root.isPresent()){
+      await dashboardPage.panelActions.logout();
+      await browser.wait(ExpectedConditions.presenceOf(loginPage.nameInput), 20000, "The user wasn't logged out correctly");
     }
   });
 
   it('should display an error message when invalid credentials are set', async () =>{
     await loginPage.login(USER, INVALID_PASSWORD);
-    await loginPage.verifyLoginError();
+    expect(await loginPage.isErrorMessagePresent()).toBe(true, "Error message is not displayed");
+    expect(await loginPage.getErrorMessageText()).toBe("The provided username and password combination was incorrect.");
   });
 
   it('should correctly login', async () => {
     await loginPage.login(USER, PASSWORD);
     await loginPage.waitForLoginToBeProcessed();
-    await dashboardComponent.waitForDashboardToLoad();
-    expect(await panelActionsComponent.getLoggedUser()).toBe(USER);
+    await dashboardPage.dashboardComponent.waitForDashboardToLoad();
+    expect(await dashboardPage.panelActions.getLoggedUser()).toBe(USER);
   });
 
 });
