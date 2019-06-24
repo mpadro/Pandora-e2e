@@ -7,17 +7,18 @@ This is a Protractor demo project to test Pandora App
 
 ```
 Padora-e2e/
-|- helpers/            // helper functions
 |- node_modules/       // downloaded node modules
-|- pages/              // pages represented with page objects framework
-|- specs/              // it contains all of the test classes
+|- src
+  |- helpers/            // helper functions
+  |- pages/              // pages represented with page objects framework
+  |- specs/              // it contains all of the test classes
+  |- dev.conf.ts         // configuration file for dev/test environment
+  |- local.conf.ts       // configuration file for local environment
 |- .gitignore          // files that we don't want to commit to git
-|- conf.js             // configuration file
 |- package.json        // node dependencies for the project
 |- README.md           // this file
 |- tsconfig.json       // typescript transpile configuration
 ```
-
 
 ## Getting started
 
