@@ -1,0 +1,8 @@
+plugins.js
+spec.js
+specPageObjects.js
+angularPage.js
+*.d.ts
+node_modules
+package-lock.json
+dist/*
